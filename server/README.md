@@ -3,13 +3,14 @@
 REST API for booking sports slots, built with Node.js. The one hard rule:
 a slot can never be double-booked.
 
-Stack: Node.js + Express (SQLite added when persistence comes in).
+Stack: Node.js + Express + SQLite (`better-sqlite3`).
 
 ## Setup
 
 ```bash
 cd server
 npm install
+npm run seed      # creates the db, seeds venues
 npm start         # http://localhost:3000  (npm run dev to auto-reload)
 ```
 
@@ -17,11 +18,12 @@ Health check:
 
 ```bash
 curl localhost:3000/health
+curl localhost:3000/venues
 ```
 
 ## Endpoints (built incrementally)
 
-- [ ] `GET /venues` — list venues
+- [x] `GET /venues` — list venues
 - [ ] `GET /venues/:id/slots?date=YYYY-MM-DD` — slots for a date, with status
 - [ ] `POST /bookings` — book a slot, concurrency-safe
 - [ ] `GET /users/:id/bookings` — a user's bookings

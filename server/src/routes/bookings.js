@@ -45,4 +45,20 @@ router.post('/', currentUser, (req, res) => {
   }
 });
 
+router.delete('/:id', currentUser, (req, res) => {
+  const bookingId = Number(req.params.id);
+
+  const booking = db.prepare('SELECT * FROM bookings WHERE id = ?').get(bookingId);
+  if (!booking || booking.status !== 'active') {
+    return res.status(404).json({ error: 'Booking not found' });
+  }
+  if (booking.user_id !== req.user.id) {
+    return res.status(403).json({ error: 'Not your booking' });
+  }
+
+  // soft cancel - the row leaves the active-slot index so the slot reopens.
+  db.prepare("UPDATE bookings SET status = 'cancelled' WHERE id = ?").run(bookingId);
+  res.status(204).end();
+});
+
 module.exports = router;

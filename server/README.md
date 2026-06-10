@@ -27,4 +27,4 @@ curl localhost:3000/venues
 - [x] `GET /venues/:id/slots?date=YYYY-MM-DD` — slots for a date, with status
 - [x] `POST /bookings` — book a slot, concurrency-safe
 - [x] `GET /users/:id/bookings` — a user's bookings
-- [ ] `DELETE /bookings/:id` — cancel a booking
+- [x] `DELETE /bookings/:id` — cancel a booking

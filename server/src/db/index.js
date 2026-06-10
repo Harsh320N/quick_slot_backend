@@ -33,6 +33,12 @@ db.exec(`
     FOREIGN KEY (user_id)  REFERENCES users(id),
     FOREIGN KEY (venue_id) REFERENCES venues(id)
   );
+
+  -- the actual guard against double-booking: only one active booking can
+  -- exist per venue/date/hour. cancelled rows fall out of the index.
+  CREATE UNIQUE INDEX IF NOT EXISTS uniq_active_slot
+    ON bookings (venue_id, date, start_hour)
+    WHERE status = 'active';
 `);
 
 module.exports = db;

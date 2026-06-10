@@ -29,4 +29,8 @@ function isValidDate(date) {
   return !Number.isNaN(d.getTime()) && date === d.toISOString().slice(0, 10);
 }
 
-module.exports = { buildSlots, isValidDate };
+function isValidHour(hour) {
+  return Number.isInteger(hour) && hour >= openHour && hour < closeHour;
+}
+
+module.exports = { buildSlots, isValidDate, isValidHour };

@@ -1,0 +1,14 @@
+{
+  "name": "quickslot-server",
+  "version": "1.0.0",
+  "description": "QuickSlot backend - book sports slots without double-booking",
+  "main": "src/server.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}
